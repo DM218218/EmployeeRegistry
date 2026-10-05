@@ -160,7 +160,7 @@ namespace EmployeeRegistry
                 catch (ArgumentException ex)
                 {
                     Console.WriteLine();
-                    Console.WriteLine($"Error adding employee. Try to repair the employee number. [Y/N]");
+                    Console.WriteLine($"Error adding employee. Try to repair the employee number? [Y/N]");
                     string confirm = Console.ReadKey().KeyChar.ToString().ToLower();
 
                     if (confirm == "y")

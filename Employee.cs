@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace EmployeeRegistry
 {
@@ -12,7 +13,8 @@ namespace EmployeeRegistry
         private decimal salary;
         private DateTime hireDate;
 
-        public int EmployeeNumber { get => employeeNumber; }
+        [JsonInclude]
+        public int EmployeeNumber { get => employeeNumber; private set => employeeNumber = value; }
         public string FirstName { get => firstName; }
         public string LastName { get => lastName; }
         public decimal Salary { get => salary; }
@@ -44,6 +46,11 @@ namespace EmployeeRegistry
         {
             firstName = newFirstName;
             lastName = newLastName;
+        }
+
+        public override string ToString()
+        {
+            return $"Employee {employeeNumber}: {firstName} {lastName}";
         }
     }
 }

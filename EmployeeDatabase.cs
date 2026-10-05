@@ -12,7 +12,7 @@ namespace EmployeeRegistry
         private int nextAvailableEmployeeNumber;
         private string databaseFilePath = @$"{System.IO.Directory.GetCurrentDirectory()}\data\";
         private string databaseFileName = "employees.json";
-        string nextEmployeeNumberFileName = "nen.dat";
+        private string nextEmployeeNumberFileName = "nen.dat";
 
         public string[] DateFormat { get; set; } = { "MM/dd/yyyy", "dd/MM/yyyy", "M/d/yyyy", "d/M/yyyy", "M/dd/yyyy",
                                                      "yyyy-MM-dd", "yyyy-dd-MM", "M-d-yyyy", "d-M-yyyy", "M-dd-yyyy",
