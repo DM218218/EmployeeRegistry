@@ -45,6 +45,10 @@
             employeeNumberLabel = new System.Windows.Forms.Label();
             saveEmployeeButton = new System.Windows.Forms.Button();
             cancelButton = new System.Windows.Forms.Button();
+            departmentComboBox = new System.Windows.Forms.ComboBox();
+            label6 = new System.Windows.Forms.Label();
+            securityClearanceComboBox = new System.Windows.Forms.ComboBox();
+            label7 = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // employeeList
@@ -52,7 +56,7 @@
             employeeList.FormattingEnabled = true;
             employeeList.Location = new System.Drawing.Point(51, 58);
             employeeList.Name = "employeeList";
-            employeeList.Size = new System.Drawing.Size(364, 529);
+            employeeList.Size = new System.Drawing.Size(364, 634);
             employeeList.TabIndex = 0;
             employeeList.SelectedIndexChanged += employeeList_SelectedIndexChanged;
             // 
@@ -83,7 +87,7 @@
             // hiringDateCalender
             // 
             hiringDateCalender.Enabled = false;
-            hiringDateCalender.Location = new System.Drawing.Point(454, 309);
+            hiringDateCalender.Location = new System.Drawing.Point(454, 364);
             hiringDateCalender.MaxSelectionCount = 1;
             hiringDateCalender.Name = "hiringDateCalender";
             hiringDateCalender.TabIndex = 4;
@@ -122,7 +126,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(454, 285);
+            label4.Location = new System.Drawing.Point(454, 340);
             label4.Margin = new System.Windows.Forms.Padding(3, 20, 3, 0);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(66, 15);
@@ -132,7 +136,7 @@
             // selectedDateLabel
             // 
             selectedDateLabel.AutoSize = true;
-            selectedDateLabel.Location = new System.Drawing.Point(454, 480);
+            selectedDateLabel.Location = new System.Drawing.Point(454, 535);
             selectedDateLabel.Name = "selectedDateLabel";
             selectedDateLabel.Size = new System.Drawing.Size(74, 15);
             selectedDateLabel.TabIndex = 9;
@@ -140,7 +144,7 @@
             // 
             // newButton
             // 
-            newButton.Location = new System.Drawing.Point(454, 564);
+            newButton.Location = new System.Drawing.Point(454, 669);
             newButton.Name = "newButton";
             newButton.Size = new System.Drawing.Size(120, 23);
             newButton.TabIndex = 10;
@@ -150,7 +154,7 @@
             // 
             // removeButton
             // 
-            removeButton.Location = new System.Drawing.Point(580, 564);
+            removeButton.Location = new System.Drawing.Point(580, 669);
             removeButton.Name = "removeButton";
             removeButton.Size = new System.Drawing.Size(120, 23);
             removeButton.TabIndex = 11;
@@ -160,7 +164,7 @@
             // 
             // saveButton
             // 
-            saveButton.Location = new System.Drawing.Point(706, 564);
+            saveButton.Location = new System.Drawing.Point(706, 669);
             saveButton.Name = "saveButton";
             saveButton.Size = new System.Drawing.Size(120, 23);
             saveButton.TabIndex = 12;
@@ -189,7 +193,7 @@
             // saveEmployeeButton
             // 
             saveEmployeeButton.Enabled = false;
-            saveEmployeeButton.Location = new System.Drawing.Point(706, 309);
+            saveEmployeeButton.Location = new System.Drawing.Point(706, 364);
             saveEmployeeButton.Name = "saveEmployeeButton";
             saveEmployeeButton.Size = new System.Drawing.Size(120, 23);
             saveEmployeeButton.TabIndex = 15;
@@ -200,7 +204,7 @@
             // cancelButton
             // 
             cancelButton.Enabled = false;
-            cancelButton.Location = new System.Drawing.Point(706, 338);
+            cancelButton.Location = new System.Drawing.Point(706, 393);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new System.Drawing.Size(120, 23);
             cancelButton.TabIndex = 16;
@@ -208,11 +212,54 @@
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += cancelButton_Click;
             // 
+            // departmentComboBox
+            // 
+            departmentComboBox.Enabled = false;
+            departmentComboBox.FormattingEnabled = true;
+            departmentComboBox.Location = new System.Drawing.Point(454, 303);
+            departmentComboBox.Name = "departmentComboBox";
+            departmentComboBox.Size = new System.Drawing.Size(180, 23);
+            departmentComboBox.TabIndex = 17;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(454, 285);
+            label6.Margin = new System.Windows.Forms.Padding(3, 20, 3, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(70, 15);
+            label6.TabIndex = 18;
+            label6.Text = "Department";
+            // 
+            // securityClearanceComboBox
+            // 
+            securityClearanceComboBox.BackColor = System.Drawing.SystemColors.Window;
+            securityClearanceComboBox.Enabled = false;
+            securityClearanceComboBox.FormattingEnabled = true;
+            securityClearanceComboBox.Location = new System.Drawing.Point(646, 303);
+            securityClearanceComboBox.Name = "securityClearanceComboBox";
+            securityClearanceComboBox.Size = new System.Drawing.Size(180, 23);
+            securityClearanceComboBox.TabIndex = 19;
+            securityClearanceComboBox.SelectedIndexChanged += securityClearanceComboBox_SelectedIndexChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(646, 285);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(104, 15);
+            label7.TabIndex = 20;
+            label7.Text = "Security Clearance";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(878, 669);
+            ClientSize = new System.Drawing.Size(878, 756);
+            Controls.Add(label7);
+            Controls.Add(securityClearanceComboBox);
+            Controls.Add(label6);
+            Controls.Add(departmentComboBox);
             Controls.Add(cancelButton);
             Controls.Add(saveEmployeeButton);
             Controls.Add(employeeNumberLabel);
@@ -255,5 +302,9 @@
         private System.Windows.Forms.Label employeeNumberLabel;
         private System.Windows.Forms.Button saveEmployeeButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.ComboBox departmentComboBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox securityClearanceComboBox;
+        private System.Windows.Forms.Label label7;
     }
 }

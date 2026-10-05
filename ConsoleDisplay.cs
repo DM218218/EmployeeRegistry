@@ -129,7 +129,34 @@ namespace EmployeeRegistry
             while (!decimal.TryParse(Console.ReadLine(), out salary))
             {
                 Console.WriteLine("Invalid input. Please enter a valid salary.");
-                Console.Write("Salary: ");
+            }
+
+            Console.WriteLine("Department:");
+
+            foreach (var department in employeeDatabase.GetAllDepartments())
+            {
+                Console.WriteLine($"{department.DepartmentNumber}. {department.DepartmentName}");
+            }
+
+            int departmentChoiceNumeric;
+
+            while (!(int.TryParse(Console.ReadLine(), out departmentChoiceNumeric) && employeeDatabase.GetAllIds(2).Contains(departmentChoiceNumeric)))
+            {
+                Console.WriteLine("Invalid choice. Please select a valid department.");
+            }
+
+            Console.WriteLine("Security clearance level:");
+
+            foreach (var clearance in employeeDatabase.GetAllClearances())
+            {
+                Console.WriteLine($"{clearance.ClearanceLevel}. {clearance.ClearanceLevelName}");
+            }
+
+            int clearanceChoiceNumeric;
+
+            while (!(int.TryParse(Console.ReadLine(), out clearanceChoiceNumeric) && employeeDatabase.GetAllIds(1).Contains(clearanceChoiceNumeric)))
+            {
+                Console.WriteLine("Invalid choice. Please select a valid security clearance level.");
             }
 
             Console.Write("Hire Date (DD/MM/YYYY): ");
@@ -147,6 +174,8 @@ namespace EmployeeRegistry
             Console.WriteLine($"First Name: {firstName}");
             Console.WriteLine($"Last Name: {lastName}");
             Console.WriteLine($"Salary: {salary:C}");
+            Console.WriteLine($"Department: {employeeDatabase.GetDepartmentByNumber(departmentChoiceNumeric).DepartmentName}");
+            Console.WriteLine($"Security Clearance Level: {employeeDatabase.GetClearanceByLevel(clearanceChoiceNumeric).ClearanceLevelName}");
             Console.WriteLine($"Hire Date: {hireDate.ToShortDateString()}");
 
             string confirmation = Console.ReadKey().KeyChar.ToString().ToLower();
@@ -155,7 +184,9 @@ namespace EmployeeRegistry
             {
                 try
                 {
-                    employeeDatabase.AddEmployee(firstName, lastName, salary, hireDate);
+                    employeeDatabase.AddEmployee(firstName, lastName, salary, hireDate, 
+                                                 employeeDatabase.GetDepartmentByNumber(departmentChoiceNumeric), 
+                                                 employeeDatabase.GetClearanceByLevel(clearanceChoiceNumeric));
                 }
                 catch (ArgumentException ex)
                 {
@@ -197,6 +228,8 @@ namespace EmployeeRegistry
                 Console.WriteLine($"Name: {employee.FirstName} {employee.LastName}");
                 Console.WriteLine($"Salary: {employee.Salary:C}");
                 Console.WriteLine($"Hire Date: {employee.HireDate.ToShortDateString()}");
+                Console.WriteLine($"Department: {employee.Department.DepartmentName}");
+                Console.WriteLine($"Security Clearance Level: {employee.Clearance.ClearanceLevelName}");
                 Console.WriteLine();
             }
 

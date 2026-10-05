@@ -30,6 +30,9 @@ namespace EmployeeRegistry
         private void Initialize()
         {
             this.employeeList.DataSource = employeeDatabase.GetAllEmployees();
+            this.securityClearanceComboBox.DataSource = employeeDatabase.GetAllClearances();
+            this.departmentComboBox.DataSource = employeeDatabase.GetAllDepartments();
+            employeeList_SelectedIndexChanged(this, EventArgs.Empty);
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -59,6 +62,25 @@ namespace EmployeeRegistry
                 this.lastNameTextBox.Text = selectedEmployee.LastName;
                 this.salaryTextBox.Text = selectedEmployee.Salary.ToString("F2");
                 this.hiringDateCalender.SetDate(selectedEmployee.HireDate);
+
+                foreach (var item in this.departmentComboBox.Items)
+                {
+                    if (item is Department department && department.DepartmentNumber == selectedEmployee.Department.DepartmentNumber)
+                    {
+                        this.departmentComboBox.SelectedItem = item;
+                        break;
+                    }
+                }
+
+                foreach (var item in this.securityClearanceComboBox.Items)
+                {
+                    if (item is Clearance clearance && clearance.ClearanceLevel == selectedEmployee.Clearance.ClearanceLevel)
+                    {
+                        this.securityClearanceComboBox.SelectedItem = item;
+                        this.securityClearanceComboBox.BackColor = clearance.GetClearanceColor();
+                        break;
+                    }
+                }
             }
             else
             {
@@ -67,6 +89,9 @@ namespace EmployeeRegistry
                 this.lastNameTextBox.Text = string.Empty;
                 this.salaryTextBox.Text = string.Empty;
                 this.hiringDateCalender.SetDate(DateTime.Today);
+                this.departmentComboBox.SelectedItem = null;
+                this.securityClearanceComboBox.SelectedItem = null;
+                this.securityClearanceComboBox.BackColor = SystemColors.Window;
             }
         }
 
@@ -103,6 +128,8 @@ namespace EmployeeRegistry
             this.lastNameTextBox.ReadOnly = false;
             this.salaryTextBox.ReadOnly = false;
             this.hiringDateCalender.Enabled = true;
+            this.departmentComboBox.Enabled = true;
+            this.securityClearanceComboBox.Enabled = true;
 
             this.saveEmployeeButton.Enabled = true;
             this.cancelButton.Enabled = true;
@@ -124,6 +151,8 @@ namespace EmployeeRegistry
             this.lastNameTextBox.ReadOnly = true;
             this.salaryTextBox.ReadOnly = true;
             this.hiringDateCalender.Enabled = false;
+            this.departmentComboBox.Enabled = false;
+            this.securityClearanceComboBox.Enabled = false;
 
             this.saveEmployeeButton.Enabled = false;
             this.cancelButton.Enabled = false;
@@ -134,7 +163,7 @@ namespace EmployeeRegistry
 
         private void saveEmployeeButton_Click(object sender, EventArgs e)
         {
-            if(this.firstNameTextBox.Text == string.Empty || this.lastNameTextBox.Text == string.Empty || this.salaryTextBox.Text == string.Empty)
+            if (this.firstNameTextBox.Text == string.Empty || this.lastNameTextBox.Text == string.Empty || this.salaryTextBox.Text == string.Empty)
             {
                 MessageBox.Show("Please fill in all fields before saving.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -145,7 +174,10 @@ namespace EmployeeRegistry
                 {
                     decimal salary = decimal.Parse(this.salaryTextBox.Text);
                     DateTime hireDate = this.hiringDateCalender.SelectionStart;
-                    employeeDatabase.AddEmployee(this.firstNameTextBox.Text, this.lastNameTextBox.Text, salary, hireDate);
+
+                    employeeDatabase.AddEmployee(this.firstNameTextBox.Text, this.lastNameTextBox.Text, salary, hireDate, 
+                                                 this.departmentComboBox.SelectedItem as Department, this.securityClearanceComboBox.SelectedItem as Clearance);
+
                     this.employeeList.DataSource = null;
                     this.employeeList.DataSource = employeeDatabase.GetAllEmployees();
                     MessageBox.Show("Employee added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -158,13 +190,21 @@ namespace EmployeeRegistry
                 catch (ArgumentException ex)
                 {
                     DialogResult result = MessageBox.Show($"Error adding employee. Try to repair the employee number?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                    
+
                     if (result == DialogResult.Yes)
                     {
                         employeeDatabase.RepairNextEmployeeNumber();
                         MessageBox.Show("Employee number repaired. Please try adding the employee again.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
+            }
+        }
+
+        private void securityClearanceComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.securityClearanceComboBox.SelectedItem != null)
+            {
+                this.securityClearanceComboBox.BackColor = (this.securityClearanceComboBox.SelectedItem as Clearance).GetClearanceColor();
             }
         }
     }

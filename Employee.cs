@@ -12,6 +12,8 @@ namespace EmployeeRegistry
         private string lastName;
         private decimal salary;
         private DateTime hireDate;
+        private Department department;
+        private Clearance clearance;
 
         [JsonInclude]
         public int EmployeeNumber { get => employeeNumber; private set => employeeNumber = value; }
@@ -19,13 +21,17 @@ namespace EmployeeRegistry
         public string LastName { get => lastName; }
         public decimal Salary { get => salary; }
         public DateTime HireDate { get => hireDate; }
+        public Department Department { get => department; }
+        public Clearance Clearance { get => clearance; }
 
-        public Employee(string firstName, string lastName, decimal salary, DateTime hireDate)
+        public Employee(string firstName, string lastName, decimal salary, DateTime hireDate, Department department, Clearance clearance)
         {
             this.firstName = firstName;
             this.lastName = lastName;
             this.salary = salary;
             this.hireDate = hireDate;
+            this.department = department;
+            this.clearance = clearance;
         }
 
         public void SetEmployeeNumber(int employeeNumber)
@@ -48,9 +54,19 @@ namespace EmployeeRegistry
             lastName = newLastName;
         }
 
+        public void changeDepartment(Department newDepartment)
+        {
+            department = newDepartment;
+        }
+
+        public void changeClearance(Clearance newClearance)
+        {
+            clearance = newClearance;
+        }
+
         public override string ToString()
         {
-            return $"Employee {employeeNumber}: {firstName} {lastName}";
+            return $"Employee {employeeNumber}: {firstName} {lastName} - {department}";
         }
     }
 }
