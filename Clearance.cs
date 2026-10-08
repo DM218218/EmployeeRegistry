@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace EmployeeRegistry
 {
-    internal class Clearance
+    public class Clearance
     {
         public int ClearanceLevel { get; private set; }
         public string ClearanceLevelName { get; private set; }

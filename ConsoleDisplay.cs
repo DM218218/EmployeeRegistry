@@ -15,6 +15,7 @@ namespace EmployeeRegistry
 
         public ConsoleDisplay(EmployeeDatabase employeeDatabase)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             this.employeeDatabase = employeeDatabase;
         }
 

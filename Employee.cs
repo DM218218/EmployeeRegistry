@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace EmployeeRegistry
 {
-    internal class Employee
+    public class Employee
     {
         private int employeeNumber = -1;
         private string firstName;

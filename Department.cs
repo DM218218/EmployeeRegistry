@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EmployeeRegistry
 {
-    internal class Department
+    public class Department
     {
         public string DepartmentName { get; private set; }
         public int DepartmentNumber { get; private set; }
